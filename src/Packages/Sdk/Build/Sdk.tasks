@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- This file lists all the tasks that ship by default with MSBuild -->
+
+  <!-- NOTE: Listing a <UsingTask> tag in a *.tasks file like this one rather than in a project or targets file
+             can give a significant performance advantage in a large build, because every time a <UsingTask> tag
+             is encountered, it will cause the task to be rediscovered next time the task is used. -->
+
+  <!-- NOTE: Using the fully qualified class name in a <UsingTask> tag is faster than using a partially qualified name. -->
+
+  <UsingTask TaskName="$(PillrTaskNamespace).Configure"               AssemblyFile="$(PillrTaskAssembly)" Runtime="*" />
+  <UsingTask TaskName="$(PillrTaskNamespace).Pillr_OpenDB"            AssemblyFile="$(PillrTaskAssembly)" Runtime="*" />
+  <UsingTask TaskName="$(PillrTaskNamespace).Pillr_CloseDB"           AssemblyFile="$(PillrTaskAssembly)" Runtime="*" />
+  <UsingTask TaskName="$(PillrTaskNamespace).PillrLoadUserData"       AssemblyFile="$(PillrTaskAssembly)" Runtime="*" />
+  <UsingTask TaskName="$(PillrTaskNamespace).Pillr_MakeJsonFile"      AssemblyFile="$(PillrTaskAssembly)" Runtime="*" />
+  <UsingTask TaskName="$(PillrTaskNamespace).Pillr_FinalizeBuild"     AssemblyFile="$(PillrTaskAssembly)" Runtime="*" />
+  <UsingTask TaskName="$(PillrTaskNamespace).Docfx_HtmlDoc"           AssemblyFile="$(PillrTaskAssembly)" Runtime="*" />
+  <UsingTask TaskName="$(PillrTaskNamespace).Docfx_PdfDoc"            AssemblyFile="$(PillrTaskAssembly)" Runtime="*" />
+  <UsingTask TaskName="$(PillrTaskNamespace).QueryPillrDb"            AssemblyFile="$(PillrTaskAssembly)" Runtime="*" />
+  <UsingTask TaskName="$(PillrTaskNamespace).GitHub_CreateRepo"       AssemblyFile="$(PillrTaskAssembly)" Runtime="*" />
+  <UsingTask TaskName="$(PillrTaskNamespace).GitHub_EditRepo"         AssemblyFile="$(PillrTaskAssembly)" Runtime="*" />
+  <UsingTask TaskName="$(PillrTaskNamespace).Git_CreateRepo"          AssemblyFile="$(PillrTaskAssembly)" Runtime="*" />
+  <!-- Tasks for deploying Kudu web applications and listening for events -->
+  <UsingTask TaskName="$(PillrTaskNamespace).Kudu_DeployZip"          AssemblyFile="$(PillrTaskAssembly)" Runtime="*" />
+  <UsingTask TaskName="$(PillrTaskNamespace).Nuget_PushPackage"       AssemblyFile="$(PillrTaskAssembly)" Runtime="*" />
+  <UsingTask TaskName="$(PillrTaskNamespace).Nuget_DeletePackage"     AssemblyFile="$(PillrTaskAssembly)" Runtime="*" />
+  <UsingTask TaskName="$(PillrTaskNamespace).Nuget_DeletePackage"     AssemblyFile="$(PillrTaskAssembly)" Runtime="*" />
+  <!-- <UsingTask TaskName="$(PillrTaskNamespace).TailwindExec"           AssemblyFile="$(PillrTaskAssembly)" Runtime="*" /> -->
+  <UsingTask TaskName="$(PillrTaskNamespace).SendEmail"               AssemblyFile="$(PillrTaskAssembly)" Runtime="*" />
+  <UsingTask TaskName="$(PillrTaskNamespace).Slack_PostMessage"       AssemblyFile="$(PillrTaskAssembly)" Runtime="*" />
+  <UsingTask TaskName="$(PillrTaskNamespace).TaskItemsFromFlatArray"  AssemblyFile="$(PillrTaskAssembly)" Runtime="*" />
+</Project>

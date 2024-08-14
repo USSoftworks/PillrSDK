@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <Choose>
+    <When Condition="Exists('$(ProjectDir).pillr')">
+    </When>
+    <Otherwise>
+    </Otherwise>
+  </Choose>
+
+  <!--
+  =====================================================================
+   Pillr_Error
+
+     Report errors from the system
+  =====================================================================
+  -->
+  <Target Name="Pillr_Error">
+    <Error Text="Error initializing the Pillr SDK" />
+  </Target>
+ 
+
+  <!--
+  =====================================================================
+   Pillr_Initialize
+
+     This target initializes the system by doing the following:
+       1. Decompress the .pillr archive if its exists
+       2. Open the Pillr.db database
+       3. Run the configuration task 
+  =====================================================================
+  -->
+  <Target Name="Pillr_Initialize" BeforeTargets="Build;Pillr_Finalize">
+    <Unzip
+      DestinationFolder="$(PillrProjectDir)"
+      SourceFiles="$(PillrProjectArchive)"
+      Condition="Exists('$(PillrProjectArchive)')"
+      ContinueOnError="false" />
+    <MakeDir Directories="$(PillrProjectDir)" Condition="!Exists('$(PillrProjectArchive)')" />
+    <Unzip
+      DestinationFolder="$(PillrUserDir)"
+      SourceFiles="$(PillrUserArchive)"
+      Condition="Exists('$(PillrUserArchive)')"
+      ContinueOnError="false" />
+    <MakeDir Directories="$(PillrUserDir)" Condition="!Exists('$(PillrUserArchive)')" /> 
+    <Pillr_OpenDb PillrProjectDir="$(PillrProjectDir)" />
+    <!-- <Configure EnvFile="$(EnvFile)" Overwrite="$(Overwrite)">
+      <Output TaskParameter="Configuration" ItemName="Configuration" />
+    </Configure> -->
+    <PillrLoadUserData PillrUserDir="$(PillrUserDir)" />
+    <Pillr_MakeJsonFile />
+    <OnError ExecuteTargets="Pillr_Error" />
+  </Target>
+
+  <Import Project="Service.targets" />
+
+
+  <!--
+  =====================================================================
+   BeforeBuild
+
+     The overrride of the MSBuild target, BeforeBuild.
+  =====================================================================
+  -->
+  <Target Name="BeforeBuild">
+    <Message Text="Running 'BeforeBuild'" Importance="high" />
+    <!--
+    <Pillr_InitializeBuild />
+    -->
+  </Target>
+ 
+
+
+  <!--
+  =====================================================================
+   AfterBuild
+
+     The overrride of the MSBuild target, AfterBuild.
+  =====================================================================
+  -->
+  <Target Name="AfterBuild">
+    <Message Text="Running 'AfterBuild'" Importance="high" />
+    <Docfx_HtmlDoc Condition="%(Pillr_Document.Identity) == 'html'" />
+    <Docfx_PdfDoc Condition="%(Pillr_Document.Identity) == 'pdf'" />
+    <Git_CreateRepo AuthorName="$(AuthorName)" AuthorEmail="$(AuthorEmail)" />
+    <!-- <GitHub_CreateRepo AuthorName="Ken Garrett" AuthorEmail="ken.garrett@ussoftworks.com" ApiKey="$(GITHUB_APIKEY)" /> -->
+    <!-- Start the Pillr backgroud service -->
+    <!-- <Exec Command="$(ServiceBinPath)" /> -->
+
+  </Target>
+  <Import Project="Tailwind.targets" />
+  <Import Project="AzureDeploy.targets" />
+  <Import Project="Psql.targets" />
+  <Import Project="EfCoreInstall.targets" />
+
+
+  <!--
+  =====================================================================
+   Pillr_Finalize
+
+     Finalize the Pillr framework by closing the database and creating
+     a Zip archive of the Pillr directory.
+  =====================================================================
+  -->
+  <Target Name="Pillr_Finalize" AfterTargets="Pillr_Initialize;AfterBuild">
+
+    <!--
+    Finalize the build step and record in the Pillr database.
+    -->
+    <Pillr_FinalizeBuild
+      MsbVersion="$(MSBuildSemanticVersion)"
+      CpuCount="$(MSBuildNodeCount)"
+      ProjectName="$(MSBuildProjectName)"
+    />
+
+    <Pillr_CloseDb />
+    <ZipDirectory SourceDirectory="$(PillrProjectDir)" Overwrite="true" DestinationFile="$(PillrProjectArchive)" />
+    <RemoveDir Directories="$(PillrProjectDir)" Condition="$(Pillr_IsTesting) != 'true'" />
+    <ZipDirectory SourceDirectory="$(PillrUserDir)" Overwrite="true" DestinationFile="$(PillrUserArchive)" />
+    <RemoveDir Directories="$(PillrUserDir)" Condition="$(Pillr_IsTesting) != 'true'" />
+    <Message Text="Running 'ClosePillr'" Importance="High" />
+	  <!-- <Slack_PostMessage Text="Built Project!" Channel="$(SlackChannel)" ApiKey="$(SLACK_APIKEY)" ThrowError="false" /> -->
+  </Target>
+</Project>
+

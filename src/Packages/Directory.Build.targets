@@ -1,0 +1,5 @@
+<Project>
+  <PropertyGroup>
+    <PackageId>Pillr.$(ProjectName)</PackageId>
+  </PropertyGroup>
+</Project>

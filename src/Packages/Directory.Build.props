@@ -2,14 +2,14 @@
   <Import Project="$([MSBuild]::GetPathOfFileAbove(Directory.Build.props, '$(MSBuildThisFileDirectory)..\'))" />
 
   <PropertyGroup>
-    <PackageId>Pillr.$(ProjectName)</PackageId>
-    <PackageType>Dependency</PackageType>
     <PackageVersion>0.1.0</PackageVersion>
+    <Authors>USSoftworks</Authors>
   </PropertyGroup>
 
   <PropertyGroup>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <GenerateDependencyFile>true</GenerateDependencyFile>
+    <PackageOutputPath>./nupkg</PackageOutputPath>
     <IsPackable>true</IsPackable>
     <PackRelease>true</PackRelease>
     <PackageReleaseNotes>$([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)/ReleaseNotes.txt"))</PackageReleaseNotes>
