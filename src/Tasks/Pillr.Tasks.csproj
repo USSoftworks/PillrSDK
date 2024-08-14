@@ -1,0 +1,54 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <OutputType>Library</OutputType>
+    <AssemblyName>Pillr.Tasks</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PrivateAssets>none</PrivateAssets>
+    <ExcludeAssets>none</ExcludeAssets>
+  </PropertyGroup>
+
+  <!--
+  <PropertyGroup Condition="$(OutputType) == 'Module'">
+    <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
+    <ProduceOnlyReferenceAssembly>false</ProduceOnlyReferenceAssembly>
+  </PropertyGroup>
+  -->
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Build.Utilities.Core" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
+    <PackageReference Include="Microsoft.Build.Framework" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
+    <PackageReference Include="Microsoft.Data.Sqlite" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
+    <PackageReference Include="Docfx.App" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
+    <PackageReference Include="DotNetEnv" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
+    <PackageReference Include="fasterflect" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
+
+    <PackageReference Include="MailKit" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
+    <PackageReference Include="MimeKit" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
+    <PackageReference Include="Libgit2Sharp" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
+
+    <PackageReference Include="SlackNet" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
+
+    <PackageReference Include="Octokit" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Microsoft.Build.Framework" />
+    <!-- <Using Include="Microsoft.Build.Utilities" /> -->
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(PillrDataLib)" />
+    <ProjectReference Include="$(PillrUserLib)" />
+    <ProjectReference Include="$(PillrCoreLib)" />
+  </ItemGroup>
+
+</Project>

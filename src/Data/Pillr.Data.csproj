@@ -1,0 +1,65 @@
+<Project>
+  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
+  <PropertyGroup>
+    <OutputType>library</OutputType>
+    <PillrSqlDir>$(PillrSourceDir)\Data\Queries</PillrSqlDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
+    <PackageReference Include="Fasterflect" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
+    <PackageReference Include="Microsoft.Data.Sqlite" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Microsoft.Data.Sqlite" />
+  </ItemGroup>
+
+  <!--
+  ==================================================================
+   SQL Embedded Resource
+
+     The SQL strings used to query the Pillr database.
+     These strings by convention match with the name of the calling
+     API method in Pillr.Data. If the names do not match for whatever
+     reason then the name must be specified when call GetQueryString().
+  ==================================================================
+  -->
+  <ItemGroup>
+    <EmbeddedResource Include="$(PillrSQLDir)\CreateSchema.sql">
+      <LogicalName>CreateSchema</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(PillrSQLDir)\CreateBuildLog.sql">
+      <LogicalName>CreateBuildLog</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(PillrSQLDir)\CreateUser.sql">
+      <LogicalName>CreateUser</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(PillrSQLDir)\CreateRelease.sql">
+      <LogicalName>CreateRelease</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(PillrSQLDir)\CreateReleaseNote.sql">
+      <LogicalName>CreateReleaseNote</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(PillrSQLDir)\UpdateProjectMetadata.sql">
+      <LogicalName>UpdateProjectMetadata</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(PillrSQLDir)\GetProjectMetadata.sql">
+      <LogicalName>GetProjectMetadata</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(PillrSQLDir)\GetUserByX.sql">
+      <LogicalName>GetUserByX</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(PillrSQLDir)\GetBuildLogByX.sql">
+      <LogicalName>GetBuildLogByX</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(PillrSQLDir)\GetReleaseById.sql">
+      <LogicalName>GetReleaseById</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(PillrSQLDir)\GetAllDeployments.sql">
+      <LogicalName>GetAllDeployments</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
+</Project>

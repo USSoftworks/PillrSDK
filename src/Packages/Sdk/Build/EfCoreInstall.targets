@@ -1,0 +1,6 @@
+<Project>
+  <Target Name="EfCoreInstall" AfterTargets="Build">
+    <Exec Condition="'true' == 'false'" Command="dotnet tool install --global dotnet-ef" />
+    <Exec Condition="'true' == 'false'" Command="dotnet add package Microsoft.EntityFrameworkCore.Design" />
+  </Target>
+</Project>

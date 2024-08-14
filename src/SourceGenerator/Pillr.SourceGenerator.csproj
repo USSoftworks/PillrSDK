@@ -1,0 +1,27 @@
+<Project>
+  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <OutputType>library</OutputType>
+    <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PrivateAssets Condition="'$(PrivateAssets)' == ''">none</PrivateAssets>
+    <ExcludeAssets Condition="'$(ExcludeAssets)' == ''">none</ExcludeAssets>
+  </PropertyGroup>
+
+  <!--
+  <ItemGroup>
+    <ProjectReference Include="$(PillrBaseDir)\Pillr.Shared\Pillr.Shared.csproj" />
+  </ItemGroup>
+  -->
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
+  </ItemGroup>
+
+  <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
+</Project>

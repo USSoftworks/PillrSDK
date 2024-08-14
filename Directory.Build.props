@@ -1,0 +1,21 @@
+<Project>
+
+  <PropertyGroup>
+    <Configuration Condition="$(Configuration) == 'Debug'">Development</Configuration>
+    <Configuration Condition="$(Configuration) == 'Release'">Production</Configuration>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <TargetFramework>net8.0</TargetFramework>
+    <BuildProjectReferences>true</BuildProjectReferences>
+    <OutDir>$(PillrRootDir)\bin\$(Configuration)\</OutDir>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PillrRootDir>$(MSBuildThisFileDirectory.TrimEnd('\'))</PillrRootDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+   <Using Include="System" />
+  </ItemGroup>
+
+</Project>

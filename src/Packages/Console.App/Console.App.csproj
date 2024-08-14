@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk" />
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <ProjectType>DotNetTool</ProjectType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Spectre.Console.Cli" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(PILLR_DATA_CSPROJ)" />
+  </ItemGroup>
+
+</Project>

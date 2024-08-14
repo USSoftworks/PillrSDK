@@ -1,0 +1,18 @@
+<Project>
+  <Import Project="$([MSBuild]::GetPathOfFileAbove(Directory.Build.props, '$(MSBuildThisFileDirectory)..\'))" />
+
+  <PropertyGroup>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PillrSourceDir>$(MSBuildThisFileDirectory.TrimEnd('\'))</PillrSourceDir>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PILLR_DATA_CSPROJ>$(PillrSourceDir)\Data\Pillr.Data.csproj</PILLR_DATA_CSPROJ>
+    <PILLR_USER_CSPROJ>$(PillrSourceDir)\User\Pillr.User.csproj</PILLR_USER_CSPROJ>
+    <PILLR_CORE_CSPROJ>$(PillrSourceDir)\Core\Pillr.Core.csproj</PILLR_CORE_CSPROJ>
+    <PILLR_SERVER_CLIENT_CSPROJ>$(PillrSourceDir)\Server.Client\Pillr.Server.Client.csproj</PILLR_SERVER_CLIENT_CSPROJ>
+  </PropertyGroup>
+
+</Project>

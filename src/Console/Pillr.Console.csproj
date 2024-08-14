@@ -1,0 +1,47 @@
+<Project>
+  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <OutputType>exe</OutputType>
+    <IsPackable>true</IsPackable>
+    <PackAsTool>true</PackAsTool>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <ToolCommandName>Pillr</ToolCommandName>
+    <ProjectType>dotnettool</ProjectType>
+    <PackageOutputPath>./nupkg</PackageOutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PrivateAssets Condition="'$(PrivateAssets)' == ''">none</PrivateAssets>
+    <ExcludeAssets Condition="'$(ExcludeAssets)' == ''">none</ExcludeAssets>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Reactive" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
+    <PackageReference Include="EmailValidation" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
+    <PackageReference Include="Fasterflect" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
+    <PackageReference Include="libphonenumber-csharp" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
+    <PackageReference Include="Spectre.Console" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
+    <PackageReference Include="Spectre.Console.Cli" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
+  </ItemGroup>
+
+  <!--
+  ==================================================================
+   Project References                                      
+  ==================================================================
+  -->
+  <ItemGroup>
+    <ProjectReference Include="$(PILLR_CORE_CSPROJ)" />
+    <ProjectReference Include="$(PILLR_DATA_CSPROJ)" />
+    <ProjectReference Include="$(PILLR_USER_CSPROJ)" />
+    <ProjectReference Include="$(PILLR_SERVER_CLIENT_CSPROJ)" />
+  </ItemGroup>
+
+  <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
+</Project>

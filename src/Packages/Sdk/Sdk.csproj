@@ -1,0 +1,124 @@
+<Project>
+  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <PackageType>MSBuildSdk</PackageType>
+    <AssemblyName>USSoftworks.Pillr</AssemblyName>
+    <Title>Pillr B&amp;D Framework</Title>
+    <PackageDescription>Pillr is a build &amp; deploy framework on running top of MSBuild.</PackageDescription>
+    <Copyright></Copyright>
+    <PackageTags></PackageTags>
+    <RepositoryType>git</RepositoryType>
+    <!-- Tell the SDK to generate a deps.json file -->
+
+    <!-- <PackageLicenseExpression>MIT</PackageLicenseExpression> -->
+    <!-- <PackageReadmeFile>readme.md</PackageReadmeFile> -->
+    <!-- <PackageLicenseFile>license</PackageLicenseFile> -->
+  </PropertyGroup>
+
+
+  <!--
+  https://learn.microsoft.com/en-us/visualstudio/msbuild/tutorial-custom-task-code-generation?view=vs-2022#bundle-dependencies-into-the-package
+  -->
+  <PropertyGroup>
+    <!--
+    This target will run when MSBuild is collecting the files to be packaged, and we'll implement it below.
+    This property controls the dependency list for this packaging process, so by adding our custom property
+    we hook ourselves into the process in a supported way.
+    -->
+    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
+
+    <!--
+    This property tells MSBuild where the root folder of the package's build assets should be.
+    Because we are not a library package, we should not pack to 'lib'. Instead, we choose 'tasks' by convention.
+    -->
+    <BuildOutputTargetFolder>tasks</BuildOutputTargetFolder>
+
+    <!--
+    NuGet does validation that libraries in a package are exposed as dependencies, be we explicitly do not want
+    that behavior for MSBuild task. They are isolated by design. Therefore we ignore this specific warning.
+    -->
+    <NoWarn>NU1608;NU5100;NU5118</NoWarn>
+
+    <!-- Supress NuGet warning NU5128. -->
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+  </PropertyGroup>
+
+
+  <!--
+  ==================================================================
+   Project References                                      
+  ==================================================================
+  -->
+  <ItemGroup>
+    <ProjectReference Include="$(PillrSourceDir)\SourceGenerator\Pillr.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="$(PILLR_CORE_CSPROJ)" />
+    <ProjectReference Include="$(PILLR_DATA_CSPROJ)" />
+    <ProjectReference Include="$(PILLR_USER_CSPROJ)" />
+    <ProjectReference Include="$(PILLR_SERVER_CLIENT_CSPRO)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="$(PillrRootDir)readme.md" Pack="true" PackagePath="\" Visible="true" />
+	  <!-- <None Update="$(PillrBaseDir)\src\license" Pack="true" PackagePath="\" Visible="true" /> -->
+  </ItemGroup>
+
+  <ItemGroup>
+    <!--
+    These lines pack the build props/targets files to the `build` folder in the generated package.
+    by convention, the .NET SDK will look for build\<Package Id>.props and build\<Package Id>.targets
+    for automatic inclusion in the build.
+    -->
+    <Content Include="build\$(PackageId).props" PackagePath="build\" />
+    <Content Include="build\$(PackageId).targets" PackagePath="build\" />
+  </ItemGroup>
+
+  <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
+
+  <!--
+  This is the target we defined above. It's purpose is to add all of our
+  PackageReference and ProjectReference's runtime assets to our package output.
+  -->
+  <Target Name="CopyProjectReferencesToPackage" DependsOnTargets="ResolveReferences">
+    <ItemGroup>
+      <!--
+      The TargetPath is the path inside the package that the source file will be placed.
+      This is already precomputed in the ReferenceCopyLocalPaths items' DestinationSubPath, so resue it here.
+      -->
+      <BuildOutputInPackage Include="@(ReferenceCopyLocalPaths)" TargetPath="%(ReferenceCopyLocalPaths.DestinationPath)" />
+    </ItemGroup>
+  </Target>
+
+  <!--
+  This target adds the generated deps.json file to our package output.
+  -->
+  <Target
+    Name="AddBuildDependencyFileToBuiltProjectOutputGroupOutput"
+    BeforeTargets="BuiltProjectOutputGroup"
+    Condition="'$(GenerateDependencyFile)' == 'true'">
+
+    <ItemGroup>
+      <BuiltProjectOutputGroupOutput Include="$(ProjectDepsFilePath)" TargetPath="$(ProjectDepsFileName)" FinalOutputPath="$(ProjectDepsFilePath)" />
+    </ItemGroup>
+  </Target>
+
+
+  <!--
+  Here we publish the nuget package
+  -->
+  <Target Name="PublishPillrPackage" AfterTargets="Build" Condition="$(Configuration) == 'Release' OR $(Configuration) == 'Prod'">
+    <PropertyGroup>
+      <PackageFilename>$(PackageId).$(PackageVersion).nupkg</PackageFilename>
+      <PackageOutput>$(ProjectDir)$(PackageOutputPath)$(PackageFilename)</PackageOutput>
+      <ApiKey>Nuget API key goes here</ApiKey>
+    </PropertyGroup>
+    <ItemGroup>
+      <ServiceIndex Include="https://api.nuget.org/v3/index.json" />
+    </ItemGroup>
+    <Nuget_PushPackage ServiceIndexes="@(ServiceIndex)" PackageFile="$(PackageOutput)" ApiKey="$(ApiKey)" />
+  </Target>
+
+
+
+</Project>

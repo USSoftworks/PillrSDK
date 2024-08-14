@@ -1,0 +1,15 @@
+<Project>
+  <Sdk Name="Microsoft.Build.Traversal" Version="4.1.0" />
+
+  <PropertyGroup>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Build all projects recursively under the "src" folder -->
+    <ProjectReference Include=".\src\**\*.csproj" />
+  </ItemGroup>
+
+  <Target Name="Test" BeforeTargets="Build">
+    <Message Importance="high" Text="Source Dir: $(PillrRootDir)" />
+  </Target>
+</Project>
