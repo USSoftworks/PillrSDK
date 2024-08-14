@@ -4,7 +4,7 @@
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <PackageType>MSBuildSdk</PackageType>
-    <AssemblyName>USSoftworks.Pillr</AssemblyName>
+    <AssemblyName></AssemblyName>
     <Title>Pillr B&amp;D Framework</Title>
     <PackageDescription>Pillr is a build &amp; deploy framework on running top of MSBuild.</PackageDescription>
     <Copyright></Copyright>
@@ -56,7 +56,7 @@
     <ProjectReference Include="$(PILLR_CORE_CSPROJ)" />
     <ProjectReference Include="$(PILLR_DATA_CSPROJ)" />
     <ProjectReference Include="$(PILLR_USER_CSPROJ)" />
-    <ProjectReference Include="$(PILLR_SERVER_CLIENT_CSPRO)" />
+    <ProjectReference Include="$(PILLR_SERVER_CLIENT_CSPROJ)" />
   </ItemGroup>
 
   <ItemGroup>
@@ -70,8 +70,8 @@
     by convention, the .NET SDK will look for build\<Package Id>.props and build\<Package Id>.targets
     for automatic inclusion in the build.
     -->
-    <Content Include="build\$(PackageId).props" PackagePath="build\" />
-    <Content Include="build\$(PackageId).targets" PackagePath="build\" />
+    <Content Include="Build\$(PackageId).props" PackagePath="Build\" />
+    <Content Include="Build\$(PackageId).targets" PackagePath="Build\" />
   </ItemGroup>
 
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />

@@ -46,9 +46,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(PillrDataLib)" />
-    <ProjectReference Include="$(PillrUserLib)" />
-    <ProjectReference Include="$(PillrCoreLib)" />
+    <ProjectReference Include="$(PILLR_DATA_CSPROJ)" />
+    <ProjectReference Include="$(PILLR_USER_CSPROJ)" />
+    <ProjectReference Include="$(PILLR_CORE_CSPROJ)" />
   </ItemGroup>
 
 </Project>

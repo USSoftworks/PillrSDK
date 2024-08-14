@@ -2,7 +2,7 @@
   <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <OutputType>Exe</OutputType>
+    <OutputType>library</OutputType>
     <AssemblyName>Pillr.Server.Client</AssemblyName>
   </PropertyGroup>
 
