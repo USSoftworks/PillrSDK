@@ -12,11 +12,11 @@ Current features are:
 
 Future features are:
 -
-- Version management in adherence to the [Semantic Versioning](https://server.org) specification
+- Version management in adherence to the [Semantic Versioning](https://semver.org) specification
 - Automated git repo management with the following:
     1. Every project has a git repo unlesss opted out.
     2. Creates a remote Github repo.
-    3. Commit messages adhere to the [Conventional Commits](https://conventionalcommits.org/en/v1.0.0) specification
+    3. Commit messages adhere to the [Conventional Commits](https://conventionalcommits.org/) specification
     4. And much more...
 - Full infrastructure deployment using well-known IAC technologies
 - Documentation generation from source code comments using open source tools like Docfx
