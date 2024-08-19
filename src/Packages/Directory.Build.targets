@@ -2,4 +2,21 @@
   <PropertyGroup>
     <PackageId>Pillr.$(ProjectName)</PackageId>
   </PropertyGroup>
+
+  <!--
+  Here we publish the nuget package
+  -->
+  <Target Name="PublishPillrPackage" AfterTargets="Build" Condition="$(Configuration) == 'Release' OR $(Configuration) == 'Prod'">
+    <PropertyGroup>
+      <PackageFilename>$(PackageId).$(PackageVersion).nupkg</PackageFilename>
+      <PackageOutput>$(ProjectDir)$(PackageOutputPath)$(PackageFilename)</PackageOutput>
+      <ApiKey>Nuget API key goes here</ApiKey>
+    </PropertyGroup>
+    <ItemGroup>
+      <ServiceIndex Include="https://api.nuget.org/v3/index.json" />
+    </ItemGroup>
+    <Nuget_PushPackage ServiceIndexes="@(ServiceIndex)" PackageFile="$(PackageOutput)" ApiKey="$(ApiKey)" />
+  </Target>
+
+
 </Project>

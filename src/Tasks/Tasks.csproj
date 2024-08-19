@@ -30,11 +30,11 @@
     <PackageReference Include="Docfx.App" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
     <PackageReference Include="DotNetEnv" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
     <PackageReference Include="fasterflect" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
-
     <PackageReference Include="MailKit" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
     <PackageReference Include="MimeKit" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
+    <PackageReference Include="Nuget.Protocol" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
     <PackageReference Include="Libgit2Sharp" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
-
+    <PackageReference Include="Semver" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
     <PackageReference Include="SlackNet" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
 
     <PackageReference Include="Octokit" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
@@ -46,9 +46,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(PILLR_DATA_CSPROJ)" />
-    <ProjectReference Include="$(PILLR_USER_CSPROJ)" />
-    <ProjectReference Include="$(PILLR_CORE_CSPROJ)" />
+    <ProjectReference Include="$(PillrDataProject)" />
+    <ProjectReference Include="$(PillrUserProject)" />
+    <ProjectReference Include="$(PillrCoreProject)" />
   </ItemGroup>
 
 </Project>

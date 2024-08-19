@@ -1,5 +1,5 @@
 <Project>
-  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
+  <Sdk Name="Microsoft.Build.NoTargets" Version="3.7.56" />
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
@@ -52,11 +52,10 @@
   ==================================================================
   -->
   <ItemGroup>
-    <ProjectReference Include="$(PillrSourceDir)\SourceGenerator\Pillr.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
-    <ProjectReference Include="$(PILLR_CORE_CSPROJ)" />
-    <ProjectReference Include="$(PILLR_DATA_CSPROJ)" />
-    <ProjectReference Include="$(PILLR_USER_CSPROJ)" />
-    <ProjectReference Include="$(PILLR_SERVER_CLIENT_CSPROJ)" />
+    <ProjectReference Include="$(PillrCoreProject)" />
+    <ProjectReference Include="$(PillrDataProject)" />
+    <ProjectReference Include="$(PillrUserProject)" />
+    <ProjectReference Include="$(PillrServerClientProject)" />
   </ItemGroup>
 
   <ItemGroup>
@@ -70,11 +69,9 @@
     by convention, the .NET SDK will look for build\<Package Id>.props and build\<Package Id>.targets
     for automatic inclusion in the build.
     -->
-    <Content Include="Build\$(PackageId).props" PackagePath="Build\" />
-    <Content Include="Build\$(PackageId).targets" PackagePath="Build\" />
+    <Content Include="Build\Sdk.props" PackagePath="Build\" />
+    <Content Include="Build\Sdk.targets" PackagePath="Build\" />
   </ItemGroup>
-
-  <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
 
   <!--
   This is the target we defined above. It's purpose is to add all of our
@@ -102,23 +99,5 @@
       <BuiltProjectOutputGroupOutput Include="$(ProjectDepsFilePath)" TargetPath="$(ProjectDepsFileName)" FinalOutputPath="$(ProjectDepsFilePath)" />
     </ItemGroup>
   </Target>
-
-
-  <!--
-  Here we publish the nuget package
-  -->
-  <Target Name="PublishPillrPackage" AfterTargets="Build" Condition="$(Configuration) == 'Release' OR $(Configuration) == 'Prod'">
-    <PropertyGroup>
-      <PackageFilename>$(PackageId).$(PackageVersion).nupkg</PackageFilename>
-      <PackageOutput>$(ProjectDir)$(PackageOutputPath)$(PackageFilename)</PackageOutput>
-      <ApiKey>Nuget API key goes here</ApiKey>
-    </PropertyGroup>
-    <ItemGroup>
-      <ServiceIndex Include="https://api.nuget.org/v3/index.json" />
-    </ItemGroup>
-    <Nuget_PushPackage ServiceIndexes="@(ServiceIndex)" PackageFile="$(PackageOutput)" ApiKey="$(ApiKey)" />
-  </Target>
-
-
 
 </Project>

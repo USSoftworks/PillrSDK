@@ -2,7 +2,7 @@ namespace Pillr.Data;
 public record BuildLog
 {
   /// <value>
-  /// The ID of the build
+  /// The identifier of the build 
   /// </value>
   public Guid BuildId
   {

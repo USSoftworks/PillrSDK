@@ -9,10 +9,15 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <PILLR_DATA_CSPROJ>$(PillrSourceDir)\Data\Pillr.Data.csproj</PILLR_DATA_CSPROJ>
-    <PILLR_USER_CSPROJ>$(PillrSourceDir)\User\Pillr.User.csproj</PILLR_USER_CSPROJ>
-    <PILLR_CORE_CSPROJ>$(PillrSourceDir)\Core\Pillr.Core.csproj</PILLR_CORE_CSPROJ>
-    <PILLR_SERVER_CLIENT_CSPROJ>$(PillrSourceDir)\Server.Client\Pillr.Server.Client.csproj</PILLR_SERVER_CLIENT_CSPROJ>
+    <PillrDataProject>$(PillrSourceDir)\Data\Data.csproj</PillrDataProject>
+    <PillrUserProject>$(PillrSourceDir)\User\User.csproj</PillrUserProject>
+    <PillrCoreProject>$(PillrSourceDir)\Core\Core.csproj</PillrCoreProject>
+    <PillrServerClientProject>$(PillrSourceDir)\Server.Client\Server.Client.csproj</PillrServerClientProject>
+    <PillrConsoleProject>$(PillrSourceDir)\Console\Console.csproj</PillrConsoleProject>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Using Include="System" />
+  </ItemGroup>
 
 </Project>

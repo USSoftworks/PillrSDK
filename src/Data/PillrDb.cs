@@ -39,7 +39,7 @@ public sealed partial class PillrDb
     catch(Exception ex)
     {
       throw new Exception(
-        $"Could not resolve query name '{queryName}'. Either the query does not exists or there were duplicates.");
+        $"Could not resolve query name '{queryName}'. Either the query does not exists or there are duplicates.");
     }
     return query;
   }

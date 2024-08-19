@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Using Include="Dapper" />
     <Using Include="Microsoft.Data.Sqlite" />
   </ItemGroup>
 
@@ -52,6 +53,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="$(PillrSQLDir)\GetBuildLogByX.sql">
       <LogicalName>GetBuildLogByX</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(PillrSQLDir)\GetAllBuildLogs.sql">
+      <LogicalName>GetAllBuildLogs</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="$(PillrSQLDir)\GetReleaseById.sql">
       <LogicalName>GetReleaseById</LogicalName>

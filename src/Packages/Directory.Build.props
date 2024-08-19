@@ -3,13 +3,14 @@
 
   <PropertyGroup>
     <PackageVersion>0.1.0</PackageVersion>
-    <Authors>USSoftworks</Authors>
+    <Authors>Ken Garrett</Authors>
+    <Company>USSoftworks</Company>
   </PropertyGroup>
 
   <PropertyGroup>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <GenerateDependencyFile>true</GenerateDependencyFile>
-    <PackageOutputPath>./nupkg</PackageOutputPath>
+    <PackageOutputPath>$(PillrSourceDir)/nupkg</PackageOutputPath>
     <IsPackable>true</IsPackable>
     <PackRelease>true</PackRelease>
     <PackageReleaseNotes>$([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)/ReleaseNotes.txt"))</PackageReleaseNotes>

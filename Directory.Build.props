@@ -7,7 +7,9 @@
     <LangVersion>latest</LangVersion>
     <TargetFramework>net8.0</TargetFramework>
     <BuildProjectReferences>true</BuildProjectReferences>
+    <!--
     <OutDir>$(PillrRootDir)\bin\$(Configuration)\</OutDir>
+    -->
   </PropertyGroup>
 
   <PropertyGroup>

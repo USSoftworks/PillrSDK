@@ -1,3 +1,5 @@
+using Semver;
+
 using Pillr.Data;
 using Pillr.User;
 
@@ -55,16 +57,7 @@ public class Pillr_FinalizeBuild: Microsoft.Build.Utilities.Task
       if(null == db) throw new Exception("Could not locate PillrDb");
       if(null == profile) throw new Exception("Could not locate PillrUser");
 
-      if(!SemanticVersion.IsValid(MsbVersion))
-      {
-        Log.LogMessage(MessageImportance.High, "MSBuild Version string is invalid :(");
-      }
-      else
-      {
-        Log.LogMessage(MessageImportance.High,
-          $"MSBuild Version string is valid!: {MsbVersion}");
-        var semver = new SemanticVersion(MsbVersion);
-      }
+      SemVersion semver = SemVersion.Parse(MsbVersion, SemVersionStyles.Strict);
 
       // Create the build log
       var build = db.CreateBuildLog(

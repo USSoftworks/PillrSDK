@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(PillrSourceDir)\Server.Client\Pillr.Server.Client.csproj" />
+    <ProjectReference Include="$(PillrServerClientProject)" />
   </ItemGroup>
 
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
