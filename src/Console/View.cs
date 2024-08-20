@@ -4,14 +4,6 @@ using Spectre.Console.Rendering;
 using Pillr.Service.Client;
 
 namespace Pillr.Console;
-public class TestClass
-{
-  public string FirstName { get; set; }
-  public string LastName { get; set; }
-  public int Age { get; set; }
-  public DateTime CreatedOn { get; set; }
-  private string PrivateProperty => "Private";
-}
 
 public class View
 {
@@ -68,15 +60,15 @@ public class View
     form.Show();
 
     var options = RenderOptions.Create(console);
-    TestClass[] objects =
+    var objects = new[]
     { 
-      new TestClass() {
+      new {
         FirstName = "Jane",
         LastName = "Doe",
         Age = 36,
         CreatedOn = new DateTime(2024, 04, 05)
       },
-      new TestClass() {
+      new {
         FirstName = "John",
         LastName = "Doe",
         Age = 40,
@@ -85,7 +77,7 @@ public class View
     };
 
     Table table = new Table()
-      .AddData<TestClass>(objects);
+      .AddData<object>(objects);
 
     //table.Render(options, 32);
     console.Write(table);
@@ -94,7 +86,7 @@ public class View
     //client.Connect();
 
     //AnsiConsole.Prompt();
-    //AnsiConsole.Ask<int>("Select an action: ");
+    AnsiConsole.Ask<int>("Select an action: ");
   }
 
 }

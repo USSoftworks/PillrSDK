@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(PILLR_DATA_CSPROJ)" />
+    <ProjectReference Include="$(PillrDataProject)" />
     <ProjectReference Include="$(PillrConsoleProject)" />
   </ItemGroup>
 

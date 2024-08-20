@@ -11,7 +11,7 @@
   <PropertyGroup>
     <PillrDataProject>$(PillrSourceDir)\Data\Data.csproj</PillrDataProject>
     <PillrUserProject>$(PillrSourceDir)\User\User.csproj</PillrUserProject>
-    <PillrCoreProject>$(PillrSourceDir)\Core\Core.csproj</PillrCoreProject>
+    <PillrCoreProject>$(PillrSourceDir)\Utilities\Utilities.csproj</PillrCoreProject>
     <PillrServerClientProject>$(PillrSourceDir)\Server.Client\Server.Client.csproj</PillrServerClientProject>
     <PillrConsoleProject>$(PillrSourceDir)\Console\Console.csproj</PillrConsoleProject>
   </PropertyGroup>

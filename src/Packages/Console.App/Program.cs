@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 //using Microsoft.Build.Evaluation;
 
+using Pillr.Console;
+
 var builder = Host.CreateApplicationBuilder(args);
 
 //builder.Services.AddHostedService<AzureDeployService>();
@@ -20,5 +22,5 @@ var task = app.RunAsync(stoppingTokenSource.Token);
 // Run the View
 while(!task.IsCompleted || !task.IsCanceled)
 {
-  //new View().Display();
+  new View().Display();
 }

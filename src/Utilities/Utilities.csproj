@@ -1,0 +1,8 @@
+<Project>
+  <Sdk Name="Microsoft.NET.Sdk" />
+
+  <PropertyGroup>
+    <OutputType>library</OutputType>
+  </PropertyGroup>
+
+</Project>

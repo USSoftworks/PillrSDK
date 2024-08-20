@@ -1,0 +1,7 @@
+<Project>
+  <Import Project="$([MSBuild]::GetPathOfFileAbove(Directory.Build.props, '$(MSBuildThisFileDirectory)..\'))" />
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
+  </ItemGroup>
+</Project>
