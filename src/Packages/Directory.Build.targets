@@ -3,6 +3,39 @@
     <PackageId>Pillr.$(ProjectName)</PackageId>
   </PropertyGroup>
 
+  <!-- Set the properties for dependency packages -->
+  <PropertyGroup
+  Condition="$(OutputType) == 'Library'">
+    <PackageType>Dependency</PackageType>
+  </PropertyGroup>
+
+  <PropertyGroup
+  Condition="$(OutputType) == 'Library' AND $(ProjectName.Contains('Template'))">
+    <PackageType>Template</PackageType>
+  </PropertyGroup>
+
+  <!-- Set the properties for Sdk packages -->
+  <PropertyGroup
+  Condition="$(OutputType) == 'Library' AND $(ProjectName.Contains('Sdk'))">
+    <PackageType>MSBuildSdk</PackageType>
+  </PropertyGroup>
+
+  <!-- Set the properties for tool packages -->
+  <PropertyGroup
+    Condition="
+    ($(OutputType) == 'Exe' OR $(OutputType) == 'WinExe')
+    AND
+    (
+      $(ProjectName.Contains('Tool', StringComparison.OrdinalIgnoreCase))
+      OR
+      $(ProjectName.Contains('App', StringComparison.OrdinalIgnoreCase))
+    )"
+  >
+    <PackageType>DotNetTool</PackageType>
+    <PackAsTool>true</PackAsTool>
+  </PropertyGroup>
+ 
+
   <!--
   Here we publish the nuget package
   -->

@@ -2,7 +2,7 @@
   <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
   <PropertyGroup>
     <OutputType>library</OutputType>
-    <PillrSqlDir>$(PillrSourceDir)\Data\Queries</PillrSqlDir>
+    <PillrSqlDir>$(PillrSourceDir)\Data.lib\Queries</PillrSqlDir>
   </PropertyGroup>
 
   <ItemGroup>

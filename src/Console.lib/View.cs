@@ -1,4 +1,3 @@
-using System;
 using Spectre.Console;
 using Spectre.Console.Rendering;
 using Pillr.Service.Client;
@@ -8,11 +7,19 @@ namespace Pillr.Console;
 public class View
 {
 
-  public Panel GetSelectionPanel()
+  public Panel GetSelectionPanel(Color foregroundColor, Color backgroundColor)
   {
+    Style style = new Style(
+      foreground: foregroundColor,
+      background: backgroundColor,
+      decoration: Decoration.Bold);
+    PanelHeader header = new PanelHeader("Select a task:")
+      .Centered()
+      .SetStyle(style);
     return new Panel("Selection")
-      .BorderColor(Color.Red)
-      .BorderStyle(new Style(foreground: Color.Blue, background: Color.Green, decoration: Decoration.Bold));
+      .Header(header)
+      .BorderColor(backgroundColor)
+      .BorderStyle(style);
   }
 
   public void Display()
@@ -22,38 +29,11 @@ public class View
     var layout = new Layout("Root")
       .SplitColumns(
         new Layout("Left"),
-        new Layout("Right")
-          .SplitRows(
-            new Layout("Top"),
-            new Layout("Bottom")
-          )
-      )
-      .MinimumSize(5)
-      .Size(10);
+        new Layout("Right"));
 
-    layout["Left"].Update(GetSelectionPanel());
+    layout["Left"].Update(GetSelectionPanel(Color.Red, Color.Green));
+    layout["Right"].Update(GetSelectionPanel(Color.Blue, Color.Yellow));
 
-    /*
-    var projectType = AnsiConsole.Prompt(
-      new SelectionPrompt<string>()
-      .Title("Select a project:")
-      .PageSize(5)
-      .HighlightStyle(new Style()
-        .Background(Color.Cyan1)
-        .Foreground(Color.GreenYellow)
-        .Decoration(Decoration.Bold))
-      .AddChoices(new[]
-      {
-        "Website",
-        "Library",
-        "Desktop",
-        "Mobile",
-        "Service"
-      }));
-    AnsiConsole.Markup($"You selected [green]{projectType}[/]");
-    */
-
-    //AnsiConsole.Write(layout);
     var console = AnsiConsole.Create(new AnsiConsoleSettings());
 
     var form = new UserInfoForm(console);
@@ -80,6 +60,7 @@ public class View
       .AddData<object>(objects);
 
     //table.Render(options, 32);
+    console.Write(layout);
     console.Write(table);
 
     //var client = new PillrClient();

@@ -1,9 +1,6 @@
-<Project>
-  <Sdk Name="Microsoft.Build.NoTargets" Version="3.7.56" />
-
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <PackageType>MSBuildSdk</PackageType>
     <AssemblyName></AssemblyName>
     <Title>Pillr B&amp;D Framework</Title>
     <PackageDescription>Pillr is a build &amp; deploy framework on running top of MSBuild.</PackageDescription>
@@ -39,7 +36,9 @@
     NuGet does validation that libraries in a package are exposed as dependencies, be we explicitly do not want
     that behavior for MSBuild task. They are isolated by design. Therefore we ignore this specific warning.
     -->
+    <!--
     <NoWarn>NU1608;NU5100;NU5118</NoWarn>
+    -->
 
     <!-- Supress NuGet warning NU5128. -->
     <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
@@ -52,25 +51,18 @@
   ==================================================================
   -->
   <ItemGroup>
-    <ProjectReference Include="$(PillrCoreProject)" />
-    <ProjectReference Include="$(PillrDataProject)" />
-    <ProjectReference Include="$(PillrUserProject)" />
-    <ProjectReference Include="$(PillrServerClientProject)" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="$(PillrRootDir)readme.md" Pack="true" PackagePath="\" Visible="true" />
 	  <!-- <None Update="$(PillrBaseDir)\src\license" Pack="true" PackagePath="\" Visible="true" /> -->
   </ItemGroup>
 
   <ItemGroup>
     <!--
-    These lines pack the build props/targets files to the `build` folder in the generated package.
+    These lines pack the build props/targets files to the `Sdk` folder in the generated package.
     by convention, the .NET SDK will look for build\<Package Id>.props and build\<Package Id>.targets
-    for automatic inclusion in the build.
+    for automatic inclusion in the build. For SDKs, MSBuild will look for Sdk\Sdk.props and Sdk\Sdk.targets.
     -->
-    <Content Include="Build\Sdk.props" PackagePath="Build\" />
-    <Content Include="Build\Sdk.targets" PackagePath="Build\" />
+    <Content Include="Sdk\Sdk.props" PackagePath="Sdk\" />
+    <Content Include="Sdk\Sdk.targets" PackagePath="Sdk\" />
   </ItemGroup>
 
   <!--

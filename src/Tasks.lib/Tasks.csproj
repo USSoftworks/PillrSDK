@@ -47,7 +47,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(PillrDataProject)" />
-    <ProjectReference Include="$(PillrUserProject)" />
+    <ProjectReference Include="$(PillrUserDataProject)" />
     <ProjectReference Include="$(PillrCoreProject)" />
   </ItemGroup>
 

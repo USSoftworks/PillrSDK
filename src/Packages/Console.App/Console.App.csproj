@@ -2,11 +2,9 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <ProjectType>DotNetTool</ProjectType>
   </PropertyGroup>
 
   <PropertyGroup>
-    <PackAsTool>true</PackAsTool>
     <ToolCommandName>Pillr</ToolCommandName>
   </PropertyGroup>
 

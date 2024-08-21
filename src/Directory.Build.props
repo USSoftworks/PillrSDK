@@ -9,11 +9,12 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <PillrDataProject>$(PillrSourceDir)\Data\Data.csproj</PillrDataProject>
-    <PillrUserProject>$(PillrSourceDir)\User\User.csproj</PillrUserProject>
-    <PillrCoreProject>$(PillrSourceDir)\Utilities\Utilities.csproj</PillrCoreProject>
-    <PillrServerClientProject>$(PillrSourceDir)\Server.Client\Server.Client.csproj</PillrServerClientProject>
-    <PillrConsoleProject>$(PillrSourceDir)\Console\Console.csproj</PillrConsoleProject>
+    <PillrDataProject>$(PillrSourceDir)\Data.lib\Data.csproj</PillrDataProject>
+    <PillrUserDataProject>$(PillrSourceDir)\Data.User.lib\Data.User.csproj</PillrUserDataProject>
+    <PillrCoreProject>$(PillrSourceDir)\Utils.lib\Utils.csproj</PillrCoreProject>
+    <PillrServerClientProject>$(PillrSourceDir)\Server.Client.lib\Server.Client.csproj</PillrServerClientProject>
+    <PillrConsoleProject>$(PillrSourceDir)\Console.lib\Console.csproj</PillrConsoleProject>
+    <PillrUtilityProject>$(PillrSourceDir)\Utils.lib\Utils.csproj</PillrUtilityProject>
   </PropertyGroup>
 
   <ItemGroup>

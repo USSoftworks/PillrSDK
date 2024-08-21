@@ -3,5 +3,6 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
+    <PackageReference Include="xunit" PrivateAssets="$(PrivateAssets)" ExcludeAssets="$(ExcludeAssets)" />
   </ItemGroup>
 </Project>
