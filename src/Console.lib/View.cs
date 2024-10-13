@@ -1,6 +1,7 @@
 using Spectre.Console;
 using Spectre.Console.Rendering;
 using Pillr.Service.Client;
+using Pillr.Utils;
 
 namespace Pillr.Console;
 
